@@ -31,7 +31,14 @@ or new MathContext([# digits], RoundingMode.HALF_EVEN) etc.
  | sub(-10, -12) | 2 |
  | add(2147483647, 1) | 2147483648 |
  | div(5, 9) | 0.5555555555555555555555555555555556 |
- | ------- | -------- |
+ | --------- | ------ |
+ 
+ | Tables        | Are           | Cool  |
+ | ------------- |:-------------:| -----:|
+ | col 3 is      | right-aligned | $1600 |
+ | col 2 is      | centered      |   $12 |
+ | zebra stripes | are neat      |    $1 |
+ 
    
   div(1, 0) results in:
   "Problem parsing/calculating expression: 'div(1, 0)' (java.lang.ArithmeticException: Division by zero)"
