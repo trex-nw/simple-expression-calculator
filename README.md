@@ -24,14 +24,14 @@ or new MathContext([# digits], RoundingMode.HALF_EVEN) etc.
  
  Arithmetic examples (using DECIMAL128):
  
- |Example| Result|
- |-------|--------|
+ | Example | Result |
+ | ------- | -------- |
  | div(9, 3) |  3 |
  | add(20, div(9, 3)) | 23 |
  | sub(-10, -12) | 2 |
  | add(2147483647, 1) | 2147483648 |
  | div(5, 9) | 0.5555555555555555555555555555555556 |
- |-------|--------|
+ | ------- | -------- |
    
   div(1, 0) results in:
   "Problem parsing/calculating expression: 'div(1, 0)' (java.lang.ArithmeticException: Division by zero)"
