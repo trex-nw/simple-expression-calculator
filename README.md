@@ -1,9 +1,15 @@
-# simple-expression-calculator
+# Simple Expression Calculator
 
+<p>
 This is a basic project using ANTLR4 to calculate the value of a single-line expression such as:
-"let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b))" 
+</p>
+<p>
+ * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) 
+</p>
+<p>
 which evaluates to 40
-  
+</p>
+
 The expression syntax supports basic arithmetic, as well as a "let" operation where an expression or number can 
 be assigned to a variable.
  
@@ -17,34 +23,21 @@ where val1 and val2 can be an integer or an expression that evaluates to a numbe
  
 The expected input integer range is Integer.MIN_VALUE to Integer.MAX_VALUE.
  
-Digits of precision and rounding behavior can be specified using a desired MathContext instance,
-such as MathContext.DECIMAL128, ...DECIMAL64, ...DECIMAL32, 
-or new MathContext([# digits], RoundingMode.HALF_EVEN) etc.
+Digits of precision and rounding behavior can be specified when constructing 
+the Calculator class by using a desired MathContext instance.
+ 
+ 
+Arithmetic examples (using DECIMAL128):
+ 
+  * div(9, 3) -&gt; 3
+  * add(20, div(9, 3)) -&gt; 23
+  * sub(-10, -12) -&gt; 2
+  * add(2147483647, 1) -&gt; 2147483648
+  * div(5, 9) -&gt; 0.5555555555555555555555555555555556
+  * div(1, 0) -&gt; "Problem parsing/calculating expression: 'div(1, 0)' (java.lang.ArithmeticException: Division by zero)"
 
  
- Arithmetic examples (using DECIMAL128):
- 
- | Example | Result |
- | ------- | -------- |
- | div(9, 3) |  3 |
- | add(20, div(9, 3)) | 23 |
- | sub(-10, -12) | 2 |
- | add(2147483647, 1) | 2147483648 |
- | div(5, 9) | 0.5555555555555555555555555555555556 |
- | --------- | ------ |
- 
- | Tables        | Are           | Cool  |
- | ------------- |:-------------:| -----:|
- | col 3 is      | right-aligned | $1600 |
- | col 2 is      | centered      |   $12 |
- | zebra stripes | are neat      |    $1 |
- 
-   
-  div(1, 0) results in:
-  "Problem parsing/calculating expression: 'div(1, 0)' (java.lang.ArithmeticException: Division by zero)"
- 
- The syntax of the "let" operation is:
-  let(varName, val_expr, expr)
+ The syntax of the "let" operation is: _let(varName, val_expr, expr)_
   * varName: the name of the variable one more of characters: a-z|A-Z
   * val_expr: a number or expression
   * expr: an expression using the defined variable
