@@ -32,4 +32,4 @@ CLOSE_PARENS: ')';
 COMMA: ',';
 VARIABLE: ('a'..'z'|'A'..'Z')+;
 
-IGNORE_WHITE_SPACE: [ \t\r\n]+ -> skip; // ignore specified characters
+IGNORE_WHITE_SPACE: [ \t\r\n]+ -> skip; // ignores specified characters *between* tokens
