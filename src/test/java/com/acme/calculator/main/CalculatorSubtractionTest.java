@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by pturcotte on 1/10/16.
  */
-public class CalculatorSubtractionTests extends CalculatorTestSetup {
+public class CalculatorSubtractionTest extends CalculatorTestSetup {
     @Test
     public void subtractErrorFunctionTypo() {
         String expr = "ub(12,9)";

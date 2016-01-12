@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by pturcotte on 1/11/16.
  */
-public class CalculatorMultiplicationTests extends CalculatorTestSetup {
+public class CalculatorMultiplicationTest extends CalculatorTestSetup {
     @Test
     public void multiplyErrorFunctionTypo() {
         String expr = "mul(12,9)";

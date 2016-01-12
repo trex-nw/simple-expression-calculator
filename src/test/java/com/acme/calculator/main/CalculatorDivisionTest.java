@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by pturcotte on 1/11/16.
  */
-public class CalculatorDivisionTests extends CalculatorTestSetup {
+public class CalculatorDivisionTest extends CalculatorTestSetup {
     @Test
     public void divideErrorFunctionTypo() {
         String expr = "vid(12,9)";

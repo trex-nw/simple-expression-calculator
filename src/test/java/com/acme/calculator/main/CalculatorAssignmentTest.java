@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by pturcotte on 1/12/16.
  */
-public class CalculatorAssignmentTests extends CalculatorTestSetup {
+public class CalculatorAssignmentTest extends CalculatorTestSetup {
 
     @Test
     public void assignErrorFunctionTypo() {
