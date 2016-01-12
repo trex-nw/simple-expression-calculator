@@ -171,4 +171,48 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
         String expr = String.format("let(a,%d,sub(a, 1))", Integer.MIN_VALUE);
         assertEquals("-2147483649", calc(expr));
     }
+
+    @Test
+    public void assignCapitalLetterFirst() {
+        assertEquals("81", calc("let(Aa,9,mult(Aa, Aa))"));
+    }
+
+    @Test
+    public void assignLongVarName() {
+        assignLongerVarNameReps(1);
+    }
+
+    @Test
+    public void assignLongerVarNameX100() {
+        assignLongerVarNameReps(100);
+    }
+
+    @Test
+    public void assignLongerVarNameX1000() {
+        assignLongerVarNameReps(1000);
+    }
+
+    @Test
+    public void assignLongerVarNameX100K() {
+        assignLongerVarNameReps(100000);
+    }
+
+    // 1,000,000 works fine, but starts to impact build time (an extra second)
+//    @Test
+//    public void assignLongerVarNameX1M() {
+//        assignLongerVarNameReps(1000000);
+//    }
+
+    private void assignLongerVarNameReps(int reps) {
+        String origVar = "theQuickBrownFoxJumpsOverTheLazyDog";
+        StringBuilder builder =  new StringBuilder();
+        for (int ctr = 0; ctr < reps; ctr++) {
+            builder.append(origVar);
+        }
+        String var = builder.toString();
+        String expr = "let(" + var + ",77,add(" + var + ", " + var + "))";
+        assertTrue(expr.length() > origVar.length() * reps);
+        assertEquals("154", calc(expr));
+    }
+
 }
