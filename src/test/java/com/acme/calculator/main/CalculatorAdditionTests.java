@@ -183,6 +183,16 @@ public class CalculatorAdditionTests extends CalculatorTestSetup {
 
     @Test
     public void addFractionalValues() {
+        assertEquals("0.125", calc("add(div(1,16), div(1,16))"));
+    }
+
+    @Test
+    public void addFractionalValuesOfWhole() {
+        assertEquals("2", calc("add(div(5,3), div(1,3))"));
+    }
+
+    @Test
+    public void addFractionalValuesRepeating() {
         assertEquals("0.3428571428571428571428571428571429", calc("add(div(1,5), div(1,7))"));
     }
 

@@ -77,7 +77,7 @@ public class CalculatorSubtractionTests extends CalculatorTestSetup {
         assertTrue(result.contains(expr));
         assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error: invalid use of function or variable: 'su'"));
     }
-    
+
     @Test
     public void subtractWithWhitespace() {
         assertEquals("3", calc("  sub  (\t12 , \n\n 9  )"));
@@ -158,7 +158,7 @@ public class CalculatorSubtractionTests extends CalculatorTestSetup {
     public void subtractThreeAndTwoDigitsWithBorrow() {
         assertEquals("375", calc("sub(439,64)"));
     }
-    
+
     @Test
     public void subtractOneFromMaxPlusOne() {
         String result = calc(String.format("sub(%d,1)", Integer.MAX_VALUE + 1L));
@@ -185,6 +185,32 @@ public class CalculatorSubtractionTests extends CalculatorTestSetup {
 
     @Test
     public void subtractFractionalValues() {
+        assertEquals("0", calc("sub(div(1,16), div(1,16))"));
+    }
+
+    @Test
+    // ideally the result would be "1" but there's a small rounding error here
+    public void subtractFractionalValuesOfWhole() {
+        assertEquals("0.9999999999999999999999999999999998", calc("sub(div(11,9), div(2,9))"));
+    }
+
+//    @Test
+//    // todo: research - this still results in the same value as above
+    // May not be fully resolvable with decimal arithmetic due to inherent loss of precision.
+    // May require a way to add/subtract fractions for such a case using integer math before any
+    // division is done (reduce the number of division operations).
+//    public void subtractFractionalValuesOfWholeRoundUp() {
+//        Calculator calculator = new Calculator(new MathContext(34, RoundingMode.HALF_UP));
+//        assertEquals("1", calculator.calculate("sub(div(11,9), div(2,9))"));
+//    }
+
+    @Test
+    public void subFractionalValuesOfWhole2() {
+        assertEquals("2", calc("sub(div(7,3), div(1,3))"));
+    }
+
+    @Test
+    public void subtractFractionalValuesRepeating() {
         assertEquals("0.0571428571428571428571428571428571", calc("sub(div(1,5), div(1,7))"));
     }
 
@@ -199,6 +225,7 @@ public class CalculatorSubtractionTests extends CalculatorTestSetup {
     }
 
     String exprThreeLevelsA = "sub(sub(sub(34,89),sub(72,41)),sub(sub(30,74),sub(82,56)))";
+
     @Test
     public void subtractNestedThreeLevelsA() {
         assertEquals("-16", calc(exprThreeLevelsA));
@@ -206,6 +233,7 @@ public class CalculatorSubtractionTests extends CalculatorTestSetup {
 
 
     String exprThreeLevelsB = "sub(sub(sub(87,31),sub(45,19)),sub(sub(45,98),sub(67,54)))";
+
     @Test
     public void subtractNestedThreeLevelsB() {
         assertEquals("96", calc(exprThreeLevelsB));
