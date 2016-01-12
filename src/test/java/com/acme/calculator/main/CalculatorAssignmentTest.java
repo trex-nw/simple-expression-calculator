@@ -80,13 +80,23 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
     }
 
     @Test
-    public void assignErrorInvalidVariableName() {
-        String expr = "let(5,12,add(a,a)";
+    public void assignErrorInvalidVariableNameNumeric() {
+        String expr = "let(5,12,add(5,5)";
         String result = calc(expr);
         assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
         assertTrue(result.contains(expr));
         assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'mismatched input '5' expecting VARIABLE'"));
         assertTrue(result.contains("on line 1, position 4"));
+    }
+
+    @Test
+    public void assignErrorInvalidVariableNameAlphaNumeric() {
+        String expr = "let(a1,12,add(a1,a1)";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'extraneous input '1' expecting ','"));
+        assertTrue(result.contains("on line 1, position 5"));
     }
 
     @Test
