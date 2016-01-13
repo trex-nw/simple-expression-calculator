@@ -86,6 +86,7 @@ public class Calculator {
      * @param mathContextToSet MathContext to be used, such as MathContext.DECIMAL128
      */
     public Calculator(final MathContext mathContextToSet) {
+        logger.debug("Calculator() MathContext: {}", mathContextToSet.toString());
         this.mathContext = mathContextToSet;
         this.errorListener = createErrorListener();
     }
@@ -97,6 +98,8 @@ public class Calculator {
      * @return String result of the expression; can be a descriptive error message
      */
     public String calculate(final String expression) {
+        logger.info("calculate()");
+        logger.debug("calculate() expression: '{}'", expression);
         String result = null;
         try {
             BigDecimal value = parse(expression);
@@ -105,6 +108,7 @@ public class Calculator {
             // and 2.000...0 becomes "2"
             if (result.contains(PERIOD) && result.endsWith(ZERO)) {
                 result = value.stripTrailingZeros().toEngineeringString();
+                logger.debug("used stripTrailingZeros() on output");
             }
             // For the integer value case, BigDecimal.toBigIntegerExact() can also be used to remove trailing zeros.
         } catch (Throwable xcptn) {
@@ -122,6 +126,7 @@ public class Calculator {
      * @return BigDecimal result of the expression
      */
     private BigDecimal parse(final String expression) {
+        logger.debug("parse() expression: '{}'", expression);
         // Clear out any prexisting variable values in the event that an instance of this class is invoked more
         // than once, since there isn't currently a use-case to cache variable data across multiple expressions.
         variablesMap.clear();
@@ -137,7 +142,6 @@ public class Calculator {
         // ParseTree tree = parser.calc(); // begin parsing at "calc" rule
         // System.out.println(tree.toStringTree(parser)); // print LISP-style tree }
 
-
         // visit all the branches of the tree to obtain the result
         return visit(context);
     }
@@ -150,6 +154,7 @@ public class Calculator {
      * @return BasicCalculatorParser created
      */
     private BasicCalculatorParser createParser(final BasicCalculatorLexer lexer) {
+        logger.debug("createParser()");
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final BasicCalculatorParser parser = new BasicCalculatorParser(tokens);
         // Replace default Antlr4 error listener (which prints errors to stderr).
@@ -159,6 +164,7 @@ public class Calculator {
     }
 
     private BasicCalculatorLexer createLexer(final String expression) {
+        logger.debug("createLexer()");
         final BasicCalculatorLexer lexer = new BasicCalculatorLexer(new ANTLRInputStream(expression));
         // Replace default Antlr4 error listener (which prints errors to stderr).
         lexer.removeErrorListeners();
@@ -176,12 +182,14 @@ public class Calculator {
      */
     private BigDecimal visit(final BasicCalculatorParser.ExprContext context) {
         if (context.INTEGER() != null) {
-            return new BigDecimal(context.INTEGER().getText(), mathContext);
+            String text = context.INTEGER().getText();
+            logger.trace("visited INTEGER with text: '{}'", text);
+            return new BigDecimal(text, mathContext);
         } else if (context.assignment() != null) {
             final String variableName = context.VARIABLE().getText();
             final BigDecimal value = visit(context.expr(0));
             variablesMap.put(variableName, value);
-//            logger.trace("Stored {} -> {}", variableName, value);
+            logger.trace("Stored var value {} -> {}", variableName, value);
             return visit(context.expr(1));
         } else if (context.VARIABLE() != null) {
             final String variableName = context.VARIABLE().getText();
@@ -190,15 +198,19 @@ public class Calculator {
                 throw new IllegalArgumentException(
                         String.format("Syntax error: invalid use of function or variable: '%s'", variableName));
             }
-//            logger.trace("Retrieved {} -> {}", variableName, value);
+            logger.trace("Retrieved var value {} -> {}", variableName, value);
             return value;
         } else if (context.function().ADD() != null) {
+            logger.trace("ADD");
             return visit(context.expr(0)).add(visit(context.expr(1)), mathContext);
         } else if (context.function().SUBTRACT() != null) {
+            logger.trace("SUBTRACT");
             return visit(context.expr(0)).subtract(visit(context.expr(1)), mathContext);
         } else if (context.function().MULTIPLY() != null) {
+            logger.trace("MULTIPLY");
             return visit(context.expr(0)).multiply(visit(context.expr(1)), mathContext);
         } else if (context.function().DIVIDE() != null) {
+            logger.trace("DIVIDE");
             return visit(context.expr(0)).divide(visit(context.expr(1)), mathContext);
         } else {
             throw new IllegalStateException();
