@@ -1,12 +1,35 @@
 #### Simple Expression Calculator
 
+Brief Description
+---
 This is a basic project using ANTLR4 to calculate the value of a single-line expression such as:
 <p/>
-* let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) 
+    * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b))
 <p/>
 which evaluates to 40
 <p/>
 
+Building this project
+---
+git clone https://github.com/trex-nw/simple-expression-calculator.git 
+mvn clean install  
+* this project was built using Maven3
+
+Running the code
+---
+cd target/deploy
+chmod 755 ./run.sh
+./run.sh "let(a,99,mult(a,11))"
+1089 will be printed
+
+./logs/calculator.log will be created and will contain any text logged.
+
+./run.sh to see usage:
+* usage: ./run.sh "[expression to calculate]" -log_lvl DEBUG|INFO|ERROR|DEFAULT
+
+
+Expression Syntax
+---
 The expression syntax supports basic arithmetic, as well as a "let" operation where an expression or number can 
 be assigned to a variable.
  
@@ -42,6 +65,8 @@ Examples incorporating the "let" operation:
 * let(a, 5, add(a, 9)) -&gt; 14
 * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) -&gt; 40
 
+Plugins
+---
 Plugins included in the pom.xml for this project, with some basic configuration 
 (i.e. to exclude generated ANTLR files as needed):
 * PMD https://maven.apache.org/plugins/maven-pmd-plugin/
@@ -54,7 +79,8 @@ Plugins included in the pom.xml for this project, with some basic configuration
 * Shade plugin (builds uber-jar) https://maven.apache.org/plugins/maven-shade-plugin/
     * _mvn clean install_ - will create the combined jar file
     
-Known limitations:
+Known limitations
+---
 * only integer values are accepted in the expression string
     * decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
 * variable names are alphabetic only 
@@ -66,15 +92,17 @@ Known limitations:
         * use the -Xss flag to increase the stack size (-Xss&lt;size&gt;[g|G|m|M|k|K])
   * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
 
-Testing / debugging changes to the BasicCalculator.g4 grammar file:
+Testing / debugging changes to the BasicCalculator.g4 grammar file
+---
 * Per "The Definitive ANTLR 4 Reference" by Terrence Parr:
 "ANTLR provides a flexible testing tool in the runtime library called TestRig. 
 It can display lots of information about how a recognizer matches input from a 
 file or standard input. TestRig uses Java reflection to invoke compiled recognizers."
 
+Note: there may well be room for improvement in this code (suggestions are welcome), since the functionality 
+is based on a day of effort to find, understand the basics of, and apply ANTLR4.
+All of the ancillary project configuration, unit tests and cleanup, etc. has taken some additional effort.
+
 This project was made possible by the ANTLR framework from Terence Parr (http://www.antlr.org/) and the example at
 http://niels.nu/blog/2015/antlr-is-awesome.html by Niels Dommerholt.
 
-Note: there may well be room for improvement in this code (suggestions are welcome), since the functionality 
-is based on a day of effort to find, understand the basics of, and apply ANTLR4.
-All of the surrounding project configuration, unit tests and cleanup, etc. has taken some additional effort.
