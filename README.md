@@ -51,22 +51,22 @@ Plugins included in the pom.xml for this project, with some basic configuration 
 * checkstyle https://maven.apache.org/plugins/maven-checkstyle-plugin/
 * findbugs http://gleclaire.github.io/findbugs-maven-plugin/
 * Javadoc https://maven.apache.org/plugins/maven-javadoc-plugin/
-** _mvn site_ will generate reports to target/site/ for the plugins above
+  * _mvn site_ will generate reports to target/site/ for the plugins above
 * JaCoCo - painful to configure, but finally found a good example at: http://www.petrikainulainen.net/programming/maven/creating-code-coverage-reports-for-unit-and-integration-tests-with-the-jacoco-maven-plugin/
-** _mvn clean test_ runs unit tests and creates the code coverage report to the directory target/site/jacoco-ut.
+  * _mvn clean test_ runs unit tests and creates the code coverage report to the directory target/site/jacoco-ut.
 
 Known limitations:
  * only integer values are accepted in the expression string
  ** decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
  * variable names are alphabetic only 
- ** alpha-numeric variable names could be easily supported by updating the VARIABLE definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
+  * alpha-numeric variable names could be easily supported by updating the VARIABLE definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
  * The code to do calculations and determine the final value of the supplied expression string is recursive.
- ** With default JVM settings, a StackOverflowError will occur at ~11 levels of nested expressions.
- ** See the unit test assign12LevelsDeepCausesStackOverflow() in CalculatorAssignmentTest.
- ** If necessary, a StackOverflowError can be alleviated by increasing the stack size:
- *** The JVM stack size can be increased using the -Xss flag. (-Xss<size>[g|G|m|M|k|K])
- *** This flag can be specified either via the project’s configuration, or via the command line.
- ** StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
+  * With default JVM settings, a StackOverflowError will occur at ~11 levels of nested expressions.
+  * See the unit test assign12LevelsDeepCausesStackOverflow() in CalculatorAssignmentTest.
+  * If necessary, a StackOverflowError can be alleviated by increasing the stack size:
+   * The JVM stack size can be increased using the -Xss flag. (-Xss<size>[g|G|m|M|k|K])
+   * This flag can be specified either via the project’s configuration, or via the command line.
+  * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
  
 
 Testing / debugging changes to the BasicCalculator.g4 grammar file:
