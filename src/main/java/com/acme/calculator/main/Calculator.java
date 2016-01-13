@@ -120,6 +120,12 @@ public class Calculator {
         // root of the AST (Abstract Syntax Tree)
         final BasicCalculatorParser.ExprContext context = parser.expr();
 
+        // todo: research further
+        // This was intended for debugging use but isn't working as expected - causes "Syntax error in expression"
+        // ParseTree tree = parser.calc(); // begin parsing at "calc" rule
+        // System.out.println(tree.toStringTree(parser)); // print LISP-style tree }
+
+
         // visit all the branches of the tree to obtain the result
         return visit(context);
     }
