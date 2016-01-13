@@ -80,6 +80,26 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
     }
 
     @Test
+    public void assignErrorDecimal() {
+        String expr = "let(a,99.9,add(a,11))";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 8"));
+    }
+
+    @Test
+    public void assignErrorDecimalInExpr() {
+        String expr = "let(a,99,add(a,1.9))";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 16"));
+    }
+
+    @Test
     public void assignErrorInvalidVariableNameNumeric() {
         String expr = "let(5,12,add(5,5)";
         String result = calc(expr);
@@ -197,11 +217,54 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
         assignLongerVarNameReps(100000);
     }
 
-    // 1,000,000 works fine, but starts to impact build time (an extra second)
+    // 1,000,000 works fine, but starts to impact build time (an extra second delay) and doesn't seem necesarry
 //    @Test
 //    public void assignLongerVarNameX1M() {
 //        assignLongerVarNameReps(1000000);
 //    }
+
+    @Test
+    public void assignOneLevelDeep() {
+        assertEquals("17", assignLevelsDeep(1));
+    }
+
+    @Test
+    public void assign10LevelsDeep() {
+        assertEquals("5127", assignLevelsDeep(10));
+    }
+
+    @Test
+    // 11 levels deep also causes a StackOverflowError, but going a little deeper to help
+    // protect against different default build conditions
+    // (i.e. if a build environment happens to allocate more stack memory)
+    //
+    // The JVM stack size can be increased using the -Xss flag. (-Xss<size>[g|G|m|M|k|K])
+    // This flag can be specified either via the project’s configuration, or via the command line.
+    public void assign12LevelsDeepCausesStackOverflow() {
+        String result = assignLevelsDeep(12);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains("java.lang.StackOverflowError"));
+    }
+
+//    @Test
+//   this test causes: "java.lang.OutOfMemoryError: Java heap space" when run from an IDE with the default IDE setup
+//    public void assign100LevelsDeep() {
+//        assertEquals("?", assignLevelsDeep(100));
+//    }
+
+    // Note - this method would need an update to be able to work for depth > 26 due to the character
+    // arithmetic used.
+    // Fyi, a depth of 12 produces an expression string that is 69,636 characters long.
+    private String assignLevelsDeep(int depth) {
+        String varName = "a";
+        String exprFormat = "let(%s,7,add(%s,5))";
+        for (int ctr = 0; ctr < depth; ctr++) {
+            String var = varName + (char)('a' + ctr);
+            exprFormat = String.format(exprFormat, var, exprFormat);
+        }
+        String expr = String.format(exprFormat,"zzz", "zzz");
+        return calc(expr);
+    }
 
     private void assignLongerVarNameReps(int reps) {
         String origVar = "theQuickBrownFoxJumpsOverTheLazyDog";
@@ -214,5 +277,4 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
         assertTrue(expr.length() > origVar.length() * reps);
         assertEquals("154", calc(expr));
     }
-
 }
