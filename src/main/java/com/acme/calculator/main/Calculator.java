@@ -163,6 +163,12 @@ public class Calculator {
         return parser;
     }
 
+    /**
+     * Creates a lexer to tokenize the expression.
+     *
+     * @param expression to be tokenized
+     * @return BasicCalculatorLexer created
+     */
     private BasicCalculatorLexer createLexer(final String expression) {
         logger.debug("createLexer()");
         final BasicCalculatorLexer lexer = new BasicCalculatorLexer(new ANTLRInputStream(expression));
