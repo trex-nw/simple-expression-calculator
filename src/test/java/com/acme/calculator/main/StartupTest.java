@@ -1,6 +1,5 @@
 package com.acme.calculator.main;
 
-import com.sun.tools.javadoc.Start;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
