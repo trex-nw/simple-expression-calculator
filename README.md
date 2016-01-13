@@ -12,8 +12,9 @@ which evaluates to 40
 ##### Building this project
 ---
 git clone https://github.com/trex-nw/simple-expression-calculator.git <p/>
+cd simple-expression-calculator/<p/>
 mvn clean install<p/>
-* this project was built using Maven3<p/>
+* note: this project was built using Maven 3.3.3<p/>
 
 ##### Running the code
 ---
