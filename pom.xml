@@ -92,7 +92,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target</outputDirectory>
+                            <outputDirectory>${basedir}/target/deploy</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/resources</directory>
@@ -225,6 +225,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <outputFile>target/deploy/${artifactId}-${version}.jar</outputFile>
                             <transformers>
                                 <!-- add Main-Class to manifest file -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
