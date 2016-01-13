@@ -4,9 +4,9 @@
 ---
 This is a basic project using ANTLR4 to calculate the value of a single-line expression such as:
 <p/>
-    * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b))
+* let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b))
 <p/>
-which evaluates to 40
+This evaluates to "40".
 <p/>
 
 ##### Building this project
