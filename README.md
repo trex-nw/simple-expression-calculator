@@ -19,14 +19,14 @@ mvn clean install<p/>
 ##### Running the code
 ---
 cd target/deploy<p/>
-chmod 755 ./run.sh<p/>
-./run.sh "let(a,99,mult(a,11))"<p/>
+chmod 755 ./calc.sh<p/>
+./calc.sh "let(a,99,mult(a,11))"<p/>
 1089 will be printed<p/>
 <p/>
 ./logs/calculator.log will be created and will contain any text logged.<p/>
 <p/>
-./run.sh to see usage for logging levels:<p/>
-* usage: ./run.sh "[expression to calculate]" -log_lvl DEBUG|INFO|ERROR|DEFAULT
+./calc.sh to see usage for logging levels:<p/>
+* usage: ./calc.sh "[expression to calculate]" -log_lvl DEBUG|INFO|ERROR|DEFAULT
 <p/>
 
 ##### Expression Syntax
