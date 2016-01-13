@@ -4,16 +4,27 @@ main_class=com.acme.calculator.main.Startup
 
 showUsageAndExit() {
     echo "usage: $0 \"[expression to calculate]\" -log_lvl DEBUG|INFO|ERROR|DEFAULT"
-    echo "example: $0 \"let(a, 5, add(a, a))\" -log_lvl DEFAULT"
+    echo "example: $0 \"let(a, 5, add(a, a))\" -log_lvl DEBUG"
+    echo "example: $0 \"let(a, 5, add(a, a))\""
     exit
 }
 
-if [ $# -ne 3 ] || [ $2 != "-log_lvl" ]; then
+if [ $# -ne 1 ] && [ $# -ne 3 ]; then
     showUsageAndExit
 fi
 
 expr=$1
-log_lvl=$3
+
+if [ $# -eq 1 ]; then
+    log_lvl=DEFAULT
+else
+    if [ $2 != "-log_lvl" ]; then
+        showUsageAndExit
+    else
+        log_lvl=$3
+    fi
+fi
+
 
 # Perhaps the best way to do this, but provides a quick way to change logging levels via the command-line.
 # todo: find how to have log4j2 to use cmd-line option within (just one) XML or properties file
