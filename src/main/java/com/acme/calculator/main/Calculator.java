@@ -36,21 +36,33 @@ import java.util.Map;
  * MathContext instance.
  * <p>
  * Arithmetic examples:
+ * <p>
  * div(9, 3) -&gt; 3
+ * <p>
  * add(20, div(9, 3)) -&gt; 23
+ * <p>
  * sub(-10, -12) -&gt; 2
+ * <p>
  * add(2147483647, 1) -&gt; 2147483648
+ * <p>
  * div(5, 9) -&gt; 0.5555555555555555555555555555555556
+ * <p>
  * div(1, 0) -&gt; "Problem parsing/calculating expression: 'div(1, 0)' (java.lang.ArithmeticException: Division by zero)"
  * <p>
  * The syntax of the "let" operation is:
+ * <p>
  * let(varName, val_expr, expr)
+ * <p>
  * varName: the name of the variable one more of characters: a-z|A-Z
+ * <p>
  * val_expr: a number or expression
+ * <p>
  * expr: an expression using the defined variable
  * <p>
  * Examples incorporating the "let" operation:
+ * <p>
  * let(a, 5, add(a, 9)) -&gt; 14
+ * <p>
  * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) -&gt; 40
  * <p>
  * This code was made possible by the ANTLR framework by Terence Parr (http://www.antlr.org/) and the example at
@@ -109,7 +121,7 @@ public class Calculator {
      * @param expression the expression to parse and calculate
      * @return BigDecimal result of the expression
      */
-    public BigDecimal parse(final String expression) {
+    private BigDecimal parse(final String expression) {
         // Clear out any prexisting variable values in the event that an instance of this class is invoked more
         // than once, since there isn't currently a use-case to cache variable data across multiple expressions.
         variablesMap.clear();
