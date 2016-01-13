@@ -60,7 +60,7 @@ Known limitations:
     * With default JVM settings, a StackOverflowError will occur at ~11 levels of nested expressions.
     * See the unit test assign12LevelsDeepCausesStackOverflow() in CalculatorAssignmentTest.
     * If necessary, a StackOverflowError can be alleviated by increasing the stack size:
-        * use the -Xss flag to increase the stack size (-Xss<size>[g|G|m|M|k|K])
+        * use the -Xss flag to increase the stack size (-Xss&lt;size&gt;[g|G|m|M|k|K])
   * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
  
 
