@@ -79,6 +79,16 @@ public class CalculatorSubtractionTest extends CalculatorTestSetup {
     }
 
     @Test
+    public void subtractErrorDecimal() {
+        String expr = "sub(.02,1)";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 4"));
+    }
+
+    @Test
     public void subtractWithWhitespace() {
         assertEquals("3", calc("  sub  (\t12 , \n\n 9  )"));
     }

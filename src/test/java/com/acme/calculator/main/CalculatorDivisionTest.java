@@ -79,6 +79,16 @@ public class CalculatorDivisionTest extends CalculatorTestSetup {
     }
 
     @Test
+    public void divideErrorDecimal() {
+        String expr = "div(12,.1)";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 7"));
+    }
+
+    @Test
     public void divideWithWhitespace() {
         assertEquals("1.333333333333333333333333333333333", calc("  div  (\t12 , \n\n 9  )"));
     }

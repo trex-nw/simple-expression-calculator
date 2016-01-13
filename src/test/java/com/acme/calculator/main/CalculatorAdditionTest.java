@@ -79,6 +79,16 @@ public class CalculatorAdditionTest extends CalculatorTestSetup {
     }
 
     @Test
+    public void addErrorDecimal() {
+        String expr = "add(12,9.1)";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 8"));
+    }
+
+    @Test
     public void addWithWhitespace() {
         assertEquals("21", calc("  add  (\t12 , \n\n 9  )"));
     }

@@ -79,6 +79,16 @@ public class CalculatorMultiplicationTest extends CalculatorTestSetup {
     }
 
     @Test
+    public void multiplyErrorDecimal() {
+        String expr = "mult(1.2,1)";
+        String result = calc(expr);
+        assertTrue(result.startsWith(Calculator.ERROR_PREFIX));
+        assertTrue(result.contains(expr));
+        assertTrue(result.contains("java.lang.IllegalArgumentException: Syntax error in expression: 'token recognition error at: '.'"));
+        assertTrue(result.contains("on line 1, position 6"));
+    }
+
+    @Test
     public void multiplyWithWhitespace() {
         assertEquals("108", calc("  mult  (\t12 , \n\n 9  )"));
     }
