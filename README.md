@@ -92,7 +92,13 @@ Plugins included in the pom.xml for this project, with some basic configuration
     * If necessary, a StackOverflowError can be alleviated by increasing the stack size:
         * use the -Xss flag to increase the stack size (-Xss&lt;size&gt;[g|G|m|M|k|K])
   * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
-
+* The output text is formatted using BigDecimal.toEngineeringString(). Other options could be made available via command line or a configuration file if needed.
+    * mult(4611686014132420609,4611686014132420609) results in "21.26764789294457273699886026968793E+36"
+* MathContext.DECIMAL128 is applied by default for high-precision calculations. 
+    * Other options could be made available via command line or a configuration file if needed.
+* Floating point calculations have small inherent losses, so inexact results can occur.
+    * sub(div(11,9),div(2,9)) results in "0.9999999999999999999999999999999998" rather than "1"
+    
 ##### Testing / debugging changes to the BasicCalculator.g4 grammar file
 ---
 * Per "The Definitive ANTLR 4 Reference" by Terrence Parr:<p/>
