@@ -98,7 +98,7 @@
                                     <directory>src/main/resources</directory>
                                     <includes>
                                         <include>**/*.properties</include>
-                                        <include>**/log4j2.xml</include>
+                                        <include>**/log4j2*.xml</include>
                                     </includes>
                                 </resource>
                                 <resource>

@@ -1,11 +1,41 @@
 #!/bin/bash
 jar_file=simple.expression.calculator-1.0-SNAPSHOT.jar
 main_class=com.acme.calculator.main.Startup
-log_lvl=debug
-if [ $# -ne 1 ]; then
-    echo "usage: $0 \"[expression to calculate]\""
-    echo "example: $0 \"let(a, 5, add(a, a))\""
+
+showUsageAndExit() {
+    echo "usage: $0 \"[expression to calculate]\" -log_lvl DEBUG|INFO|ERROR|DEFAULT"
+    echo "example: $0 \"let(a, 5, add(a, a))\" -log_lvl DEFAULT"
     exit
+}
+
+if [ $# -ne 3 ] || [ $2 != "-log_lvl" ]; then
+    showUsageAndExit
 fi
-param=$1
-java -cp .:$jar_file $main_class "$param"
+
+expr=$1
+log_lvl=$3
+
+# Perhaps the best way to do this, but provides a quick way to change logging levels via the command-line.
+# todo: find how to have log4j2 to use cmd-line option within (just one) XML or properties file
+# log4j supported this, but log4j2 doesn't seem to, at least when using an XML config file.
+
+case $log_lvl in
+DEFAULT)
+    log_file=log4j2.xml
+    ;;
+DEBUG)
+    log_file=log4j2_debug.xml
+    ;;
+INFO)
+    log_file=log4j2_info.xml
+    ;;
+ERROR)
+    log_file=log4j2_error.xml
+    ;;
+*)
+    echo "Log level of: \"$log_lvl\" not recognized."
+    showUsageAndExit
+esac
+
+log_file_opt="-Dlog4j.configurationFile=$PWD/$log_file"
+java -cp .:$jar_file $log_file_opt $main_class "$expr"
