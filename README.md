@@ -25,7 +25,7 @@ chmod 755 ./run.sh<p/>
 <p/>
 ./logs/calculator.log will be created and will contain any text logged.<p/>
 <p/>
-./run.sh to see usage:<p/>
+./run.sh to see usage for logging levels:<p/>
 * usage: ./run.sh "[expression to calculate]" -log_lvl DEBUG|INFO|ERROR|DEFAULT
 <p/>
 
