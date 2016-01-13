@@ -229,9 +229,15 @@ public class CalculatorAssignmentTest extends CalculatorTestSetup {
     }
 
     @Test
-    public void assign10LevelsDeep() {
-        assertEquals("5127", assignLevelsDeep(10));
+    public void assign5LevelsDeep() {
+        assertEquals("167", assignLevelsDeep(5));
     }
+
+// Not reliable - this test with 10 levels of depth sometimes results in a StackOverflowError on the Travis CI build server
+//    @Test
+//    public void assign10LevelsDeep() {
+//        assertEquals("5127", assignLevelsDeep(10));
+//    }
 
     @Test
     // 11 levels deep also causes a StackOverflowError, but going a little deeper to help
