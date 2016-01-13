@@ -16,24 +16,30 @@ public class Startup {
         logger.info("main()");
         logger.debug("main(): number of arguments: {}", args.length);
         logger.debug("main(): arguments: {}", Arrays.asList(args));
-        if (args.length != 1) {
-            final String className = Startup.class.getName();
-            System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
-            System.out.println(String.format("usage:\n\tjava %s \"[expression]\" ", className));
-            System.out.println(String.format("example:\n\tjava %s \"let(a,7,add(a,div(10,2)))\"", className));
-            System.exit(-1);
-        }
 
         // if needed / desired, could first remove all whitespace from the expression string:
         // final String exprWithWhitespaceRemoved = args[0].replaceAll("\\s+", "");
 
         // Future option: could add more cmd-line parameters to allow passing the desired precision & RoundingMode
 
-        Calculator parser = new Calculator(MathContext.DECIMAL128);
+        if (argCountValid(args)) {
+            Calculator parser = new Calculator(MathContext.DECIMAL128);
+            final String expression = args[0];
+            final String result = parser.calculate(expression);
+            logger.debug("Expression: '{}' -> result: '{}'", expression, result);
+            System.out.println(result);
+        }
+    }
 
-        final String expression = args[0];
-        final String result = parser.calculate(expression);
-        logger.debug("Expression: '{}' -> result: '{}'", expression, result);
-        System.out.println(result);
+    static boolean argCountValid(String[] args) {
+        boolean proceed = true;
+        if (args.length != 1) {
+            final String className = Startup.class.getName();
+            System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
+            System.out.println(String.format("usage:\n\tjava %s \"[expression]\" ", className));
+            System.out.println(String.format("example:\n\tjava %s \"let(a,7,add(a,div(10,2)))\"", className));
+            proceed = false;
+        }
+        return proceed;
     }
 }
