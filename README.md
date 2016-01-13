@@ -20,7 +20,7 @@ mvn clean install<p/>
 cd target/deploy<p/>
 chmod 755 ./calc.sh<p/>
 ./calc.sh "let(a,99,mult(a,11))"<p/>
-1089 will be printed<p/>
+1089 will be printed to stdout<p/>
 <p/>
 ./logs/calculator.log will be created and will contain any text logged.<p/>
 <p/>
