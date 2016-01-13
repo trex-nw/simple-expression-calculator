@@ -1,14 +1,12 @@
-# Simple Expression Calculator
+#### Simple Expression Calculator
 
-<p>
+
 This is a basic project using ANTLR4 to calculate the value of a single-line expression such as:
-</p>
-<p>
- * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) 
-</p>
-<p>
+<p/>
+* let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) 
+<p/>
 which evaluates to 40
-</p>
+<p/>
 
 The expression syntax supports basic arithmetic, as well as a "let" operation where an expression or number can 
 be assigned to a variable.
@@ -57,7 +55,7 @@ Plugins included in the pom.xml for this project, with some basic configuration 
 
 Known limitations:
  * only integer values are accepted in the expression string
- ** decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
+  * decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
  * variable names are alphabetic only 
   * alpha-numeric variable names could be easily supported by updating the VARIABLE definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
  * The code to do calculations and determine the final value of the supplied expression string is recursive.
