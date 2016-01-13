@@ -42,15 +42,18 @@ Examples incorporating the "let" operation:
 * let(a, 5, add(a, 9)) -&gt; 14
 * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) -&gt; 40
 
-Plugins included in the pom.xml for this project, with some basic configuration (i.e. to exclude generated ANTLR files):
+Plugins included in the pom.xml for this project, with some basic configuration 
+(i.e. to exclude generated ANTLR files as needed):
 * PMD https://maven.apache.org/plugins/maven-pmd-plugin/
 * checkstyle https://maven.apache.org/plugins/maven-checkstyle-plugin/
 * findbugs http://gleclaire.github.io/findbugs-maven-plugin/
 * Javadoc https://maven.apache.org/plugins/maven-javadoc-plugin/
     * _mvn site_ will generate reports to target/site/ for the plugins above
 * JaCoCo - painful to configure, but finally found a good example at: http://www.petrikainulainen.net/programming/maven/creating-code-coverage-reports-for-unit-and-integration-tests-with-the-jacoco-maven-plugin/
-    * _mvn clean test_ runs unit tests and creates the code coverage report to the directory target/site/jacoco-ut.
-
+    * _mvn clean test_ - runs the unit tests &amp; creates the code coverage report under target/site/jacoco-ut/.
+* Shade plugin (builds uber-jar) https://maven.apache.org/plugins/maven-shade-plugin/
+    * _mvn clean install_ - will create the combined jar file
+    
 Known limitations:
 * only integer values are accepted in the expression string
     * decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
@@ -62,7 +65,6 @@ Known limitations:
     * If necessary, a StackOverflowError can be alleviated by increasing the stack size:
         * use the -Xss flag to increase the stack size (-Xss&lt;size&gt;[g|G|m|M|k|K])
   * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
- 
 
 Testing / debugging changes to the BasicCalculator.g4 grammar file:
 * Per "The Definitive ANTLR 4 Reference" by Terrence Parr:
