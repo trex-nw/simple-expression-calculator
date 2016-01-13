@@ -1,6 +1,6 @@
 #### Simple Expression Calculator
 
-Brief Description
+##### Brief Description
 ---
 This is a basic project using ANTLR4 to calculate the value of a single-line expression such as:
 <p/>
@@ -9,29 +9,29 @@ This is a basic project using ANTLR4 to calculate the value of a single-line exp
 which evaluates to 40
 <p/>
 
-Building this project
+##### Building this project
 ---
-git clone https://github.com/trex-nw/simple-expression-calculator.git 
-mvn clean install  
-* this project was built using Maven3
+git clone https://github.com/trex-nw/simple-expression-calculator.git <p/>
+mvn clean install<p/>
+* this project was built using Maven3<p/>
 
-Running the code
+##### Running the code
 ---
-cd target/deploy
-chmod 755 ./run.sh
-./run.sh "let(a,99,mult(a,11))"
-1089 will be printed
-
-./logs/calculator.log will be created and will contain any text logged.
-
-./run.sh to see usage:
+cd target/deploy<p/>
+chmod 755 ./run.sh<p/>
+./run.sh "let(a,99,mult(a,11))"<p/>
+1089 will be printed<p/>
+<p/>
+./logs/calculator.log will be created and will contain any text logged.<p/>
+<p/>
+./run.sh to see usage:<p/>
 * usage: ./run.sh "[expression to calculate]" -log_lvl DEBUG|INFO|ERROR|DEFAULT
+<p/>
 
-
-Expression Syntax
+##### Expression Syntax
 ---
 The expression syntax supports basic arithmetic, as well as a "let" operation where an expression or number can 
-be assigned to a variable.
+be assigned to a variable.<p/>
  
 The arithmetic operations supported are:
 * div(val1, val2): divides val1 by val2
@@ -65,7 +65,7 @@ Examples incorporating the "let" operation:
 * let(a, 5, add(a, 9)) -&gt; 14
 * let(a, let(b, 10, add(b,b)), let(b, 20, add(a, b)) -&gt; 40
 
-Plugins
+##### Plugins
 ---
 Plugins included in the pom.xml for this project, with some basic configuration 
 (i.e. to exclude generated ANTLR files as needed):
@@ -79,7 +79,7 @@ Plugins included in the pom.xml for this project, with some basic configuration
 * Shade plugin (builds uber-jar) https://maven.apache.org/plugins/maven-shade-plugin/
     * _mvn clean install_ - will create the combined jar file
     
-Known limitations
+##### Known limitations
 ---
 * only integer values are accepted in the expression string
     * decimal values could be easily supported by updating the NUMBER definition in the BasicCalculator.g4 grammar file (with corresponding updates to unit tests)
@@ -92,15 +92,15 @@ Known limitations
         * use the -Xss flag to increase the stack size (-Xss&lt;size&gt;[g|G|m|M|k|K])
   * StackOverflowErrors could also be prevented if necessary by refactoring the code to not use recursion.
 
-Testing / debugging changes to the BasicCalculator.g4 grammar file
+##### Testing / debugging changes to the BasicCalculator.g4 grammar file
 ---
-* Per "The Definitive ANTLR 4 Reference" by Terrence Parr:
-"ANTLR provides a flexible testing tool in the runtime library called TestRig. 
+* Per "The Definitive ANTLR 4 Reference" by Terrence Parr:<p/>
+"ANTLR provides a flexible testing tool in the runtime library called TestRig.<p/>
 It can display lots of information about how a recognizer matches input from a 
 file or standard input. TestRig uses Java reflection to invoke compiled recognizers."
 
 Note: there may well be room for improvement in this code (suggestions are welcome), since the functionality 
-is based on a day of effort to find, understand the basics of, and apply ANTLR4.
+is based on a day of effort to find, understand the basics of, and apply ANTLR4.<p/>
 All of the ancillary project configuration, unit tests and cleanup, etc. has taken some additional effort.
 
 This project was made possible by the ANTLR framework from Terence Parr (http://www.antlr.org/) and the example at
