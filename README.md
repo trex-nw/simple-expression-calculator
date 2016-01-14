@@ -15,7 +15,7 @@ cd simple-expression-calculator/<p/>
 mvn clean install<p/>
 * note: this project was developed using Maven 3.3.3, and also builds with Maven 2<p/>
  
-This project is integrated with Travis CI: <a href="https://travis-ci.org/trex-nw/simple-expression-calculator.svg">
+This project is integrated with Travis CI: <a href="https://travis-ci.org/trex-nw/simple-expression-calculator/builds">
   <img alt="Travis CI Build Status"
        src="https://travis-ci.org/trex-nw/simple-expression-calculator.svg?branch=master"/>
 </a> and Coverity Scan: <a href="https://scan.coverity.com/projects/trex-nw-simple-expression-calculator">
