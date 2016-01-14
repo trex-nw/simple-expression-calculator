@@ -15,15 +15,9 @@ public class StartupTest {
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Test
-    public void writesTextToSystemOut() {
-        System.out.print("hello world");
-        assertEquals("hello world", systemOutRule.getLog());
-    }
-
-    @Test
     public void argCountTooSmall() {
         boolean isValid = Startup.argCountValid(new String [] {});
-        String [] stdoutLines = systemOutRule.getLog().split("\n");
+        String [] stdoutLines = systemOutRule.getLog().split(Startup.NEWLINE);
         String className = Startup.class.getName();
         assertEquals(false, isValid);
         assertEquals(5, stdoutLines.length);
@@ -37,7 +31,7 @@ public class StartupTest {
     @Test
     public void argCountTooLarge() {
         boolean isValid = Startup.argCountValid(new String [] {"add", " (2, 3)"});
-        String [] stdoutLines = systemOutRule.getLog().split("\n");
+        String [] stdoutLines = systemOutRule.getLog().split(Startup.NEWLINE);
         String className = Startup.class.getName();
         assertEquals(false, isValid);
         assertEquals(5, stdoutLines.length);
@@ -51,7 +45,7 @@ public class StartupTest {
     @Test
     public void mainPrintsResult() {
         Startup.main(new String [] {"let(abc,99,mult(11,abc))"});
-        String [] stdoutLines = systemOutRule.getLog().split("\n");
+        String [] stdoutLines = systemOutRule.getLog().split(Startup.NEWLINE);
         assertEquals(1, stdoutLines.length);
         assertEquals("1089",stdoutLines[0]);
     }

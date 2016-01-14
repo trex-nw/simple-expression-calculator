@@ -17,6 +17,7 @@ import java.util.Arrays;
  */
 public class Startup {
     private static final Logger logger = LogManager.getLogger(Startup.class);
+    static String NEWLINE = System.lineSeparator();
 
     /**
      * main() needed to run this program from the command line.
@@ -53,8 +54,8 @@ public class Startup {
         if (args.length != 1) {
             final String className = Startup.class.getName();
             System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
-            System.out.println(String.format("usage:\n\tjava %s \"[expression]\" ", className));
-            System.out.println(String.format("example:\n\tjava %s \"let(a,7,add(a,div(10,2)))\"", className));
+            System.out.println(String.format("usage:%s\tjava %s \"[expression]\" ",NEWLINE, className));
+            System.out.println(String.format("example:%s\tjava %s \"let(a,7,add(a,div(10,2)))\"",NEWLINE, className));
             proceed = false;
         }
         return proceed;
