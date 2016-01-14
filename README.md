@@ -112,3 +112,7 @@ All of the ancillary project configuration, unit tests and cleanup, etc. has tak
 This project was made possible by the ANTLR framework from Terence Parr (http://www.antlr.org/) and the example at
 http://niels.nu/blog/2015/antlr-is-awesome.html by Niels Dommerholt.
 
+<a href="https://scan.coverity.com/projects/trex-nw-simple-expression-calculator">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/7577/badge.svg"/>
+</a>
