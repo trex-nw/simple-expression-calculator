@@ -21,43 +21,36 @@ public class Startup {
 
     /**
      * main() needed to run this program from the command line.
+     * Verifies command-line arguments and prints usage to stdout
+     * if the arguments are not as expected.
      *
      * @param args command-line arguments passed to this program
      */
     public static void main(final String[] args) {
         logger.info("main()");
-        logger.debug("main(): number of arguments: {}", args.length);
         logger.debug("main(): arguments: {}", Arrays.asList(args));
 
-        // if needed / desired, could first remove all whitespace from the expression string:
-        // final String exprWithWhitespaceRemoved = args[0].replaceAll("\\s+", "");
-
-        if (argCountValid(args)) {
+        if (args.length == 1) {
             Calculator parser = new Calculator(MathContext.DECIMAL128);
             final String expression = args[0];
             final String result = parser.calculate(expression);
             logger.debug("Expression: '{}' -> result: '{}'", expression, result);
             System.out.println(result);
+        } else {
+            showUsage(args);
         }
     }
 
     /**
-     * Verifies that the expected number of command-line arguments were
-     * passed in and prints usage information to stdout if an invalid
-     * number of arguments is present.
+     * Prints usage information to stdout
      *
      * @param args command-line arguments passed to this program
-     * @return boolean - whether expected number of parameters are present
      */
-    static boolean argCountValid(String[] args) {
-        boolean proceed = true;
-        if (args.length != 1) {
-            final String className = Startup.class.getName();
-            System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
-            System.out.println(String.format("usage:%s\tjava %s \"[expression]\" ",NEWLINE, className));
-            System.out.println(String.format("example:%s\tjava %s \"let(a,7,add(a,div(10,2)))\"",NEWLINE, className));
-            proceed = false;
-        }
-        return proceed;
+    static void showUsage(final String [] args) {
+        logger.debug("showUsage()");
+        final String className = Startup.class.getName();
+        System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
+        System.out.println(String.format("usage:%s\tjava -cp simple.expression.calculator-1.0-SNAPSHOT.jar %s \"[expression]\" ",NEWLINE, className));
+        System.out.println(String.format("example:%s\tjava -cp simple.expression.calculator-1.0-SNAPSHOT.jar %s \"let(a,7,add(a,div(10,2)))\"",NEWLINE, className));
     }
 }

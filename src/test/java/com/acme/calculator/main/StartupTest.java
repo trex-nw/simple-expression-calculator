@@ -16,10 +16,9 @@ public class StartupTest {
 
     @Test
     public void argCountTooSmall() {
-        boolean isValid = Startup.argCountValid(new String [] {});
+        Startup.main(new String [] {});
         String [] stdoutLines = systemOutRule.getLog().split(Startup.NEWLINE);
         String className = Startup.class.getName();
-        assertEquals(false, isValid);
         assertEquals(5, stdoutLines.length);
         assertEquals("Unexpected number of arguments (0)",stdoutLines[0]);
         assertEquals("usage:",stdoutLines[1]);
@@ -30,10 +29,9 @@ public class StartupTest {
 
     @Test
     public void argCountTooLarge() {
-        boolean isValid = Startup.argCountValid(new String [] {"add", " (2, 3)"});
+        Startup.main(new String [] {"add", " (2, 3)"});
         String [] stdoutLines = systemOutRule.getLog().split(Startup.NEWLINE);
         String className = Startup.class.getName();
-        assertEquals(false, isValid);
         assertEquals(5, stdoutLines.length);
         assertEquals("Unexpected number of arguments (2)",stdoutLines[0]);
         assertEquals("usage:",stdoutLines[1]);
