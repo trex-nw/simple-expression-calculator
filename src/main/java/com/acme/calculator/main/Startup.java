@@ -17,6 +17,7 @@ import java.util.Arrays;
  */
 public class Startup {
     private static final Logger logger = LogManager.getLogger(Startup.class);
+    private static final String JAR_FILE_NAME = "simple.expression.calculator-1.0-SNAPSHOT.jar";
     static String NEWLINE = System.lineSeparator();
 
     /**
@@ -50,7 +51,7 @@ public class Startup {
         logger.debug("showUsage()");
         final String className = Startup.class.getName();
         System.out.println(String.format("Unexpected number of arguments (%d)", args.length));
-        System.out.println(String.format("usage:%s\tjava -cp simple.expression.calculator-1.0-SNAPSHOT.jar %s \"[expression]\" ",NEWLINE, className));
-        System.out.println(String.format("example:%s\tjava -cp simple.expression.calculator-1.0-SNAPSHOT.jar %s \"let(a,7,add(a,div(10,2)))\"",NEWLINE, className));
+        System.out.println(String.format("usage:%s\tjava -cp %s %s \"[expression]\" ",NEWLINE, JAR_FILE_NAME, className));
+        System.out.println(String.format("example:%s\tjava -cp %s %s \"let(a,7,add(a,div(10,2)))\"",NEWLINE, JAR_FILE_NAME, className));
     }
 }
