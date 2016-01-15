@@ -23,6 +23,7 @@ This project is integrated with Travis CI: <a href="https://travis-ci.org/trex-n
        src="https://scan.coverity.com/projects/7577/badge.svg"/>
 </a>
 <p/>
+* Note: the Travis CI build just automates testing of the build process - no output files are available from Travis CI.
 <p/>
 
 ##### Running the code
